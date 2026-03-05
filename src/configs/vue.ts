@@ -124,7 +124,7 @@ export async function vue(
         'ts/explicit-function-return-type': 'off',
 
         'vue/block-order': ['error', {
-          order: ['script', 'template', 'style'],
+          order: ['template', 'script', 'style'],
         }],
         'vue/component-name-in-template-casing': ['error', 'PascalCase'],
         'vue/component-options-name-casing': ['error', 'PascalCase'],
@@ -182,7 +182,7 @@ export async function vue(
                 multiline: 'always',
                 singleline: 'always',
               }],
-              'vue/brace-style': ['error', 'stroustrup', { allowSingleLine: true }],
+              'vue/brace-style': ['error', '1tbs', { allowSingleLine: false }],
               'vue/comma-dangle': ['error', 'always-multiline'],
               'vue/comma-spacing': ['error', { after: true, before: false }],
               'vue/comma-style': ['error', 'last'],
