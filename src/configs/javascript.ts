@@ -36,10 +36,10 @@ export async function javascript(
       linterOptions: {
         reportUnusedDisableDirectives: true,
       },
-      name: 'antfu/javascript/setup',
+      name: 'gwokhou/javascript/setup',
     },
     {
-      name: 'antfu/javascript/rules',
+      name: 'gwokhou/javascript/rules',
       plugins: {
         'antfu': pluginAntfu,
         'unused-imports': pluginUnusedImports,

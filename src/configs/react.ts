@@ -75,7 +75,7 @@ export async function react(
 
   return [
     {
-      name: 'antfu/react/setup',
+      name: 'gwokhou/react/setup',
       plugins: {
         'react': plugins['@eslint-react'],
         'react-dom': plugins['@eslint-react/dom'],
@@ -96,7 +96,7 @@ export async function react(
         },
         sourceType: 'module',
       },
-      name: 'antfu/react/rules',
+      name: 'gwokhou/react/rules',
       rules: {
         // recommended rules from eslint-plugin-react-x https://eslint-react.xyz/docs/rules/overview#core-rules
         'react/jsx-key-before-spread': 'warn',
@@ -244,7 +244,7 @@ export async function react(
       ? [{
           files: filesTypeAware,
           ignores: ignoresTypeAware,
-          name: 'antfu/react/type-aware-rules',
+          name: 'gwokhou/react/type-aware-rules',
           rules: {
             ...typeAwareRules,
           },

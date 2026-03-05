@@ -172,7 +172,7 @@ export interface OptionsComponentExts {
 
 export interface OptionsUnicorn extends OptionsOverrides {
   /**
-   * Include all rules recommended by `eslint-plugin-unicorn`, instead of only ones picked by Anthony.
+   * Include all rules recommended by `eslint-plugin-unicorn`, instead of only the ones selected for this config.
    *
    * @default false
    */
@@ -326,7 +326,7 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
   ignores?: string[] | ((originals: string[]) => string[])
 
   /**
-   * Disable some opinionated rules to Anthony's preference.
+   * Disable some opinionated rules.
    *
    * Including:
    * - `antfu/top-level-function`

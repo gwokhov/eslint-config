@@ -15,7 +15,7 @@ export async function jsx(options: OptionsJSX = {}): Promise<TypedFlatConfigItem
         },
       },
     },
-    name: 'antfu/jsx/setup',
+    name: 'gwokhou/jsx/setup',
     plugins: {},
     rules: {},
   }

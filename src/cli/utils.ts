@@ -15,9 +15,9 @@ export function getEslintConfigContent(
   additionalConfigs?: string[],
 ): string {
   return `
-import antfu from '@antfu/eslint-config'
+import gwokhou from '@gwokhou/eslint-config'
 
-export default antfu({
+export default gwokhou({
 ${mainConfig}
 }${additionalConfigs?.map(config => `,{\n${config}\n}`)})
 `.trimStart()

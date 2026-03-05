@@ -346,9 +346,6 @@ importers:
         specifier: catalog:prod
         version: 2.0.0
     devDependencies:
-      '@antfu/eslint-config':
-        specifier: workspace:*
-        version: 'link:'
       '@antfu/ni':
         specifier: catalog:dev
         version: 28.2.0
@@ -358,6 +355,9 @@ importers:
       '@eslint/config-inspector':
         specifier: catalog:dev
         version: 1.4.2(eslint@9.39.2(jiti@2.6.1))
+      '@gwokhou/eslint-config':
+        specifier: workspace:*
+        version: 'link:'
       '@next/eslint-plugin-next':
         specifier: catalog:peer
         version: 16.1.4

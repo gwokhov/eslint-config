@@ -3,7 +3,7 @@
   "<ignored>",
   "<ignored>",
   {
-    "name": "antfu/javascript/rules",
+    "name": "gwokhou/javascript/rules",
     "plugins": [
       "antfu",
       "unused-imports",
@@ -120,7 +120,7 @@
     ],
   },
   {
-    "name": "antfu/eslint-comments/rules",
+    "name": "gwokhou/eslint-comments/rules",
     "plugins": [
       "eslint-comments",
     ],
@@ -132,7 +132,7 @@
     ],
   },
   {
-    "name": "antfu/command/rules",
+    "name": "gwokhou/command/rules",
     "plugins": [
       "command",
     ],
@@ -141,7 +141,7 @@
     ],
   },
   {
-    "name": "antfu/perfectionist/setup",
+    "name": "gwokhou/perfectionist/setup",
     "plugins": [
       "perfectionist",
     ],
@@ -153,7 +153,7 @@
     ],
   },
   {
-    "name": "antfu/node/rules",
+    "name": "gwokhou/node/rules",
     "plugins": [
       "node",
     ],
@@ -169,7 +169,7 @@
     ],
   },
   {
-    "name": "antfu/jsdoc/rules",
+    "name": "gwokhou/jsdoc/rules",
     "plugins": [
       "jsdoc",
     ],
@@ -194,7 +194,7 @@
     ],
   },
   {
-    "name": "antfu/imports/rules",
+    "name": "gwokhou/imports/rules",
     "plugins": [
       "antfu",
       "import",
@@ -212,7 +212,7 @@
     ],
   },
   {
-    "name": "antfu/unicorn/rules",
+    "name": "gwokhou/unicorn/rules",
     "plugins": [
       "unicorn",
     ],
@@ -246,12 +246,12 @@
         },
       },
     },
-    "name": "antfu/jsx/setup",
+    "name": "gwokhou/jsx/setup",
     "plugins": [],
     "rules": [],
   },
   {
-    "name": "antfu/typescript/setup",
+    "name": "gwokhou/typescript/setup",
     "plugins": [
       "antfu",
       "ts",
@@ -272,7 +272,7 @@
         "sourceType": "module",
       },
     },
-    "name": "antfu/typescript/parser",
+    "name": "gwokhou/typescript/parser",
   },
   {
     "files": [
@@ -280,7 +280,7 @@
       "**/*.?([cm])tsx",
       "**/*.vue",
     ],
-    "name": "antfu/typescript/rules",
+    "name": "gwokhou/typescript/rules",
     "rules": [
       "- constructor-super",
       "- getter-return",
@@ -348,7 +348,7 @@
     ],
   },
   {
-    "name": "antfu/stylistic/rules",
+    "name": "gwokhou/stylistic/rules",
     "plugins": [
       "antfu",
       "style",
@@ -425,7 +425,7 @@
     ],
   },
   {
-    "name": "antfu/regexp/rules",
+    "name": "gwokhou/regexp/rules",
     "plugins": [
       "regexp",
     ],
@@ -500,7 +500,7 @@
     ],
   },
   {
-    "name": "antfu/test/setup",
+    "name": "gwokhou/test/setup",
     "plugins": [
       "test",
     ],
@@ -513,7 +513,7 @@
       "**/*.bench.?([cm])[jt]s?(x)",
       "**/*.benchmark.?([cm])[jt]s?(x)",
     ],
-    "name": "antfu/test/rules",
+    "name": "gwokhou/test/rules",
     "rules": [
       "test/consistent-test-it",
       "test/no-identical-title",
@@ -529,7 +529,7 @@
   },
   {
     "languageOptions": {},
-    "name": "antfu/vue/setup",
+    "name": "gwokhou/vue/setup",
     "plugins": [
       "vue",
     ],
@@ -550,7 +550,7 @@
         "sourceType": "module",
       },
     },
-    "name": "antfu/vue/rules",
+    "name": "gwokhou/vue/rules",
     "processor": "merged-processor:eslint-plugin-vue+eslint-processor-vue-blocks",
     "rules": [
       "vue/comment-directive",
@@ -718,7 +718,7 @@
     ],
   },
   {
-    "name": "antfu/jsonc/setup",
+    "name": "gwokhou/jsonc/setup",
     "plugins": [
       "jsonc",
     ],
@@ -732,7 +732,7 @@
     "languageOptions": {
       "parser": "jsonc-eslint-parser",
     },
-    "name": "antfu/jsonc/rules",
+    "name": "gwokhou/jsonc/rules",
     "rules": [
       "jsonc/no-bigint-literals",
       "jsonc/no-binary-expression",
@@ -776,7 +776,7 @@
     "files": [
       "**/package.json",
     ],
-    "name": "antfu/sort/package-json",
+    "name": "gwokhou/sort/package-json",
     "rules": [
       "jsonc/sort-array-values",
       "jsonc/sort-keys",
@@ -787,7 +787,7 @@
       "**/[jt]sconfig.json",
       "**/[jt]sconfig.*.json",
     ],
-    "name": "antfu/sort/tsconfig-json",
+    "name": "gwokhou/sort/tsconfig-json",
     "rules": [
       "jsonc/sort-keys",
     ],
@@ -800,7 +800,7 @@
     "languageOptions": {
       "parser": "jsonc-eslint-parser",
     },
-    "name": "antfu/pnpm/package-json",
+    "name": "gwokhou/pnpm/package-json",
     "plugins": [
       "pnpm",
     ],
@@ -817,7 +817,7 @@
     "languageOptions": {
       "parser": "yaml-eslint-parser",
     },
-    "name": "antfu/pnpm/pnpm-workspace-yaml",
+    "name": "gwokhou/pnpm/pnpm-workspace-yaml",
     "plugins": [
       "pnpm",
     ],
@@ -834,7 +834,7 @@
     "languageOptions": {
       "parser": "yaml-eslint-parser",
     },
-    "name": "antfu/pnpm/pnpm-workspace-yaml-sort",
+    "name": "gwokhou/pnpm/pnpm-workspace-yaml-sort",
     "plugins": [
       "yaml",
     ],
@@ -843,7 +843,7 @@
     ],
   },
   {
-    "name": "antfu/yaml/setup",
+    "name": "gwokhou/yaml/setup",
     "plugins": [
       "yaml",
     ],
@@ -855,7 +855,7 @@
     "languageOptions": {
       "parser": "yaml-eslint-parser",
     },
-    "name": "antfu/yaml/rules",
+    "name": "gwokhou/yaml/rules",
     "rules": [
       "- style/spaced-comment",
       "yaml/block-mapping",
@@ -879,7 +879,7 @@
     ],
   },
   {
-    "name": "antfu/toml/setup",
+    "name": "gwokhou/toml/setup",
     "plugins": [
       "toml",
     ],
@@ -891,7 +891,7 @@
     "languageOptions": {
       "parser": "toml-eslint-parser",
     },
-    "name": "antfu/toml/rules",
+    "name": "gwokhou/toml/rules",
     "rules": [
       "- style/spaced-comment",
       "toml/comma-style",
@@ -916,7 +916,7 @@
     ],
   },
   {
-    "name": "antfu/markdown/setup",
+    "name": "gwokhou/markdown/setup",
     "plugins": [
       "markdown",
     ],
@@ -928,7 +928,7 @@
     "ignores": [
       "**/*.md/*.md",
     ],
-    "name": "antfu/markdown/processor",
+    "name": "gwokhou/markdown/processor",
     "processor": "merged-processor:@eslint/markdown/markdown+pass-through",
   },
   {
@@ -938,7 +938,7 @@
     "languageOptions": {
       "parser": "parser-plain",
     },
-    "name": "antfu/markdown/parser",
+    "name": "gwokhou/markdown/parser",
   },
   {
     "files": [
@@ -952,7 +952,7 @@
         },
       },
     },
-    "name": "antfu/markdown/disables",
+    "name": "gwokhou/markdown/disables",
     "rules": [
       "- antfu/no-top-level-await",
       "- no-alert",
@@ -985,7 +985,7 @@
     "files": [
       "**/scripts/**/*.?([cm])[jt]s?(x)",
     ],
-    "name": "antfu/disables/scripts",
+    "name": "gwokhou/disables/scripts",
     "rules": [
       "- antfu/no-top-level-await",
       "- no-console",
@@ -997,7 +997,7 @@
       "**/cli/**/*.?([cm])[jt]s?(x)",
       "**/cli.?([cm])[jt]s?(x)",
     ],
-    "name": "antfu/disables/cli",
+    "name": "gwokhou/disables/cli",
     "rules": [
       "- antfu/no-top-level-await",
       "- no-console",
@@ -1008,7 +1008,7 @@
       "**/bin/**/*",
       "**/bin.?([cm])[jt]s?(x)",
     ],
-    "name": "antfu/disables/bin",
+    "name": "gwokhou/disables/bin",
     "rules": [
       "- antfu/no-import-dist",
       "- antfu/no-import-node-modules-by-path",
@@ -1018,7 +1018,7 @@
     "files": [
       "**/*.d.?([cm])ts",
     ],
-    "name": "antfu/disables/dts",
+    "name": "gwokhou/disables/dts",
     "rules": [
       "- eslint-comments/no-unlimited-disable",
       "- no-restricted-syntax",
@@ -1030,7 +1030,7 @@
       "**/*.js",
       "**/*.cjs",
     ],
-    "name": "antfu/disables/cjs",
+    "name": "gwokhou/disables/cjs",
     "rules": [
       "- ts/no-require-imports",
     ],
@@ -1040,7 +1040,7 @@
       "**/*.config.?([cm])[jt]s?(x)",
       "**/*.config.*.?([cm])[jt]s?(x)",
     ],
-    "name": "antfu/disables/config-files",
+    "name": "gwokhou/disables/config-files",
     "rules": [
       "- antfu/no-top-level-await",
       "- no-console",

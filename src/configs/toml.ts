@@ -26,7 +26,7 @@ export async function toml(
 
   return [
     {
-      name: 'antfu/toml/setup',
+      name: 'gwokhou/toml/setup',
       plugins: {
         toml: pluginToml,
       },
@@ -36,7 +36,7 @@ export async function toml(
       languageOptions: {
         parser: parserToml,
       },
-      name: 'antfu/toml/rules',
+      name: 'gwokhou/toml/rules',
       rules: {
         'style/spaced-comment': 'off',
 
