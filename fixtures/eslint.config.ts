@@ -1,6 +1,6 @@
-import { antfu } from './src'
+import { gwokhou } from './src'
 
-export default antfu(
+export default gwokhou(
   {
     vue: {
       a11y: true,

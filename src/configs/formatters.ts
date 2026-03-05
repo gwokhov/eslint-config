@@ -91,7 +91,7 @@ export async function formatters(
 
   const configs: TypedFlatConfigItem[] = [
     {
-      name: 'antfu/formatter/setup',
+      name: 'gwokhou/formatter/setup',
       plugins: {
         format: pluginFormat,
       },
@@ -105,7 +105,7 @@ export async function formatters(
         languageOptions: {
           parser: parserPlain,
         },
-        name: 'antfu/formatter/css',
+        name: 'gwokhou/formatter/css',
         rules: {
           'format/prettier': [
             'error',
@@ -120,7 +120,7 @@ export async function formatters(
         languageOptions: {
           parser: parserPlain,
         },
-        name: 'antfu/formatter/scss',
+        name: 'gwokhou/formatter/scss',
         rules: {
           'format/prettier': [
             'error',
@@ -135,7 +135,7 @@ export async function formatters(
         languageOptions: {
           parser: parserPlain,
         },
-        name: 'antfu/formatter/less',
+        name: 'gwokhou/formatter/less',
         rules: {
           'format/prettier': [
             'error',
@@ -154,7 +154,7 @@ export async function formatters(
       languageOptions: {
         parser: parserPlain,
       },
-      name: 'antfu/formatter/html',
+      name: 'gwokhou/formatter/html',
       rules: {
         'format/prettier': [
           'error',
@@ -172,7 +172,7 @@ export async function formatters(
       languageOptions: {
         parser: parserPlain,
       },
-      name: 'antfu/formatter/xml',
+      name: 'gwokhou/formatter/xml',
       rules: {
         'format/prettier': [
           'error',
@@ -192,7 +192,7 @@ export async function formatters(
       languageOptions: {
         parser: parserPlain,
       },
-      name: 'antfu/formatter/svg',
+      name: 'gwokhou/formatter/svg',
       rules: {
         'format/prettier': [
           'error',
@@ -224,7 +224,7 @@ export async function formatters(
       languageOptions: {
         parser: parserPlain,
       },
-      name: 'antfu/formatter/markdown',
+      name: 'gwokhou/formatter/markdown',
       rules: {
         [`format/${formater}`]: [
           'error',
@@ -247,7 +247,7 @@ export async function formatters(
         languageOptions: {
           parser: parserPlain,
         },
-        name: 'antfu/formatter/slidev',
+        name: 'gwokhou/formatter/slidev',
         rules: {
           'format/prettier': [
             'error',
@@ -270,7 +270,7 @@ export async function formatters(
       languageOptions: {
         parser: parserPlain,
       },
-      name: 'antfu/formatter/astro',
+      name: 'gwokhou/formatter/astro',
       rules: {
         'format/prettier': [
           'error',
@@ -286,7 +286,7 @@ export async function formatters(
 
     configs.push({
       files: [GLOB_ASTRO, GLOB_ASTRO_TS],
-      name: 'antfu/formatter/astro/disables',
+      name: 'gwokhou/formatter/astro/disables',
       rules: {
         'style/arrow-parens': 'off',
         'style/block-spacing': 'off',
@@ -305,7 +305,7 @@ export async function formatters(
       languageOptions: {
         parser: parserPlain,
       },
-      name: 'antfu/formatter/graphql',
+      name: 'gwokhou/formatter/graphql',
       rules: {
         'format/prettier': [
           'error',

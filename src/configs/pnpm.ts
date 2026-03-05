@@ -48,7 +48,7 @@ export async function pnpm(
         languageOptions: {
           parser: jsoncParser,
         },
-        name: 'antfu/pnpm/package-json',
+        name: 'gwokhou/pnpm/package-json',
         plugins: {
           pnpm: pluginPnpm,
         },
@@ -83,7 +83,7 @@ export async function pnpm(
       languageOptions: {
         parser: yamlParser,
       },
-      name: 'antfu/pnpm/pnpm-workspace-yaml',
+      name: 'gwokhou/pnpm/pnpm-workspace-yaml',
       plugins: {
         pnpm: pluginPnpm,
       },
@@ -105,7 +105,7 @@ export async function pnpm(
         languageOptions: {
           parser: yamlParser,
         },
-        name: 'antfu/pnpm/pnpm-workspace-yaml-sort',
+        name: 'gwokhou/pnpm/pnpm-workspace-yaml-sort',
         plugins: {
           yaml: pluginYaml,
         },
