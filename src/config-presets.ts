@@ -1,7 +1,9 @@
 import type { OptionsConfig } from './types'
 
-// @keep-sorted
+/** @keep-sorted */
 export const CONFIG_PRESET_FULL_ON: OptionsConfig = {
+  angular: true,
+  antislop: true,
   astro: true,
   formatters: true,
   gitignore: true,
@@ -14,10 +16,9 @@ export const CONFIG_PRESET_FULL_ON: OptionsConfig = {
   markdown: true,
   nextjs: true,
   node: true,
+  perfectionist: true,
   pnpm: true,
-  react: {
-    reactCompiler: true,
-  },
+  react: true,
   regexp: true,
   solid: true,
   stylistic: {
@@ -39,6 +40,8 @@ export const CONFIG_PRESET_FULL_ON: OptionsConfig = {
 }
 
 export const CONFIG_PRESET_FULL_OFF: OptionsConfig = {
+  angular: false,
+  antislop: false,
   astro: false,
   formatters: false,
   gitignore: false,
@@ -49,6 +52,7 @@ export const CONFIG_PRESET_FULL_OFF: OptionsConfig = {
   markdown: false,
   nextjs: false,
   node: false,
+  perfectionist: false,
   pnpm: false,
   react: false,
   regexp: false,

@@ -168,6 +168,73 @@ Add the following settings to your `.vscode/settings.json`:
 </details>
 
 <details>
+<summary>🔲 Zed support</summary>
+
+<br>
+
+Add the following settings to your `.zed/settings.json`:
+
+```jsonc
+{
+  "format_on_save": "on",
+  // Use ESLint's --fix:
+  "code_actions_on_format": {
+    "source.fixAll.eslint": true
+  },
+  "formatter": [],
+  // Enable eslint for all supported languages
+  // Defaults only include https://github.com/search?q=repo%3Azed-industries%2Fzed%20eslint_languages&type=code
+  "languages": {
+    "HTML": {
+      "language_servers": ["...", "eslint"]
+    },
+    "Markdown": {
+      "language_servers": ["...", "eslint"]
+    },
+    "Markdown-Inline": {
+      "language_servers": ["...", "eslint"]
+    },
+    "JSON": {
+      "language_servers": ["...", "eslint"]
+    },
+    "JSONC": {
+      "language_servers": ["...", "eslint"]
+    },
+    "YAML": {
+      "language_servers": ["...", "eslint"]
+    },
+    "CSS": {
+      "language_servers": ["...", "eslint"]
+    }
+    // Add other languages as needed
+  },
+  "lsp": {
+    "eslint": {
+      "settings": {
+        "workingDirectories": ["./"],
+
+        // Silent the stylistic rules in your IDE, but still auto fix them
+        "rulesCustomizations": [
+          { "rule": "style/*", "severity": "off", "fixable": true },
+          { "rule": "format/*", "severity": "off", "fixable": true },
+          { "rule": "*-indent", "severity": "off", "fixable": true },
+          { "rule": "*-spacing", "severity": "off", "fixable": true },
+          { "rule": "*-spaces", "severity": "off", "fixable": true },
+          { "rule": "*-order", "severity": "off", "fixable": true },
+          { "rule": "*-dangle", "severity": "off", "fixable": true },
+          { "rule": "*-newline", "severity": "off", "fixable": true },
+          { "rule": "*quotes", "severity": "off", "fixable": true },
+          { "rule": "*semi", "severity": "off", "fixable": true }
+        ]
+      }
+    }
+  }
+}
+```
+
+</details>
+
+<details>
 <summary>🟩 Neovim Support</summary>
 
 <br>
@@ -269,35 +336,38 @@ And that's it! Or you can configure each integration individually, for example:
 import gwokhou from '@gwokhou/eslint-config'
 
 export default gwokhou({
-  // Type of the project. 'lib' for libraries, the default is 'app'
+  /** Type of the project. 'lib' for libraries, the default is 'app' */
   type: 'lib',
 
-  // `.eslintignore` is no longer supported in Flat config, use `ignores` instead
-  // The `ignores` option in the option (first argument) is specifically treated to always be global ignores
-  // And will **extend** the config's default ignores, not override them
-  // You can also pass a function to modify the default ignores
+  /**
+   * `.eslintignore` is no longer supported in Flat config, use `ignores` instead
+   * The `ignores` option in the option (first argument) is specifically treated to always be global ignores
+   * And will **extend** the config's default ignores, not override them
+   * You can also pass a function to modify the default ignores
+   */
   ignores: [
     '**/fixtures',
     // ...globs
   ],
 
-  // Parse the `.gitignore` file to get the ignores, on by default
+  /** Parse the `.gitignore` file to get the ignores, on by default */
   gitignore: true,
 
   // Enable stylistic formatting rules
   // stylistic: true,
 
-  // Or customize the stylistic rules
+  /** Or customize the stylistic rules */
   stylistic: {
     indent: 2, // 4, or 'tab'
     quotes: 'single', // or 'double'
+    braceStyle: 'stroustrup', // '1tbs', or 'allman'
   },
 
-  // TypeScript and Vue are autodetected, you can also explicitly enable them:
+  /** TypeScript and Vue are autodetected, you can also explicitly enable them: */
   typescript: true,
   vue: true,
 
-  // Disable jsonc and yaml support
+  /** Disable jsonc and yaml support */
   jsonc: false,
   yaml: false,
 })
@@ -446,20 +516,23 @@ export default gwokhou(
     typescript: true
   },
   {
-    // Remember to specify the file glob here, otherwise it might cause the vue plugin to handle non-vue files
+    /** Remember to specify the file glob here, otherwise it might cause the vue plugin to handle non-vue files */
     files: ['**/*.vue'],
     rules: {
       'vue/operator-linebreak': ['error', 'before'],
     },
   },
   {
-    // Without `files`, they are general rules for all files
+    /** Without `files`, they are general rules for all files (Markdown excluded, see note below) */
     rules: {
       'style/semi': ['error', 'never'],
     },
   }
 )
 ```
+
+> [!NOTE]
+> Rule overrides without an explicit `files` constraint are automatically excluded from Markdown files, via [`composer.setDefaultIgnores`](https://github.com/antfu/eslint-flat-config-utils#composersetdefaultignores). This prevents JS-only rules (e.g. `no-irregular-whitespace`, `perfectionist/sort-imports`) from crashing on `@eslint/markdown`'s `SourceCode`, which doesn't expose JS-specific methods like `getAllComments()`. If you want a rule to apply to Markdown, scope it explicitly with `files: ['**/*.md']`.
 
 We also provided the `overrides` options in each integration to make it easier:
 
@@ -477,6 +550,10 @@ export default gwokhou({
     overrides: {
       'ts/consistent-type-definitions': ['error', 'interface'],
     },
+    /** type aware rules overrides should write here */
+    overridesTypeAware: {
+      'ts/no-unsafe-assignment': ['warn'],
+    }
   },
   yaml: {
     overrides: {
@@ -622,7 +699,7 @@ export default gwokhou({
 Running `npx eslint` should prompt you to install the required dependencies, otherwise, you can install them manually:
 
 ```bash
-npm i -D @eslint-react/eslint-plugin eslint-plugin-react-hooks eslint-plugin-react-refresh
+npm i -D @eslint-react/eslint-plugin eslint-plugin-react-refresh
 ```
 
 #### Next.js
@@ -720,6 +797,71 @@ Running `npx eslint` should prompt you to install the required dependencies, oth
 npm i -D @unocss/eslint-plugin
 ```
 
+#### Angular
+
+To enable Angular support, you need to explicitly turn it on:
+
+```js
+// eslint.config.js
+import gwokhou from '@gwokhou/eslint-config'
+
+export default gwokhou({
+  angular: true,
+})
+```
+
+Running `npx eslint` should prompt you to install the required dependencies, otherwise, you can install them manually:
+
+```bash
+npm i -D @angular-eslint/eslint-plugin @angular-eslint/eslint-plugin-template @angular-eslint/template-parser
+```
+
+#### Anti-Slop
+
+> [!WARNING]
+> Experimental: the enabled rule set is maintained in-house and may change in any release without following semver.
+
+To guard against low-value code patterns commonly introduced by AI agents, you can explicitly turn on the anti-slop rules:
+
+```js
+// eslint.config.js
+import gwokhou from '@gwokhou/eslint-config'
+
+export default gwokhou({
+  antislop: true,
+})
+```
+
+This enables [`eslint-plugin-slop`](https://github.com/antfu/eslint-plugin-slop) and a curated, in-house maintained subset of [`eslint-plugin-sonarjs`](https://github.com/SonarSource/SonarJS) rules focusing on redundant and duplicated code. It also disallows explicit `any` when TypeScript is enabled (inspired by [this writeup on keeping AI-authored code clean](https://zenn.dev/singularity/articles/clean-code-ci-for-ai-era)).
+
+You can toggle each plugin and pass options to `eslint-plugin-slop`:
+
+```js
+// eslint.config.js
+import gwokhou from '@gwokhou/eslint-config'
+
+export default gwokhou({
+  antislop: {
+    sonarjs: false,
+    /**
+     * an object enables `eslint-plugin-slop` and is forwarded to it
+     * via `settings.slop`, for example to only inspect recently changed code
+     */
+    slop: {
+      inspection: { mode: 'recent-changes', tracebackCommits: 5 },
+    },
+  },
+})
+```
+
+Running `npx eslint` should prompt you to install the required dependencies, otherwise, you can install them manually:
+
+```bash
+npm i -D eslint-plugin-slop eslint-plugin-sonarjs
+```
+
+Since linters only see one file at a time, we recommend pairing this option with [`jscpd`](https://github.com/kucherenko/jscpd) to detect copy-paste duplication across files, and [`knip`](https://knip.dev) to find unused files, dependencies, and exports.
+
 ### Optional Rules
 
 This config also provides some optional plugins/rules for extended usage.
@@ -771,6 +913,21 @@ export default gwokhou({
     tsconfigPath: 'tsconfig.json',
   },
 })
+```
+
+### Prettier
+
+If you're using prettier outside eslint, you can disable the config via etc:
+
+```js
+import gwokhou from '@gwokhou/eslint-config'
+import prettierConflicts from 'eslint-config-prettier'
+
+export default gwokhou({
+  rules: {
+    'some-rule': 'off'
+  }
+}, prettierConflicts)
 ```
 
 ### Editor Specific Disables

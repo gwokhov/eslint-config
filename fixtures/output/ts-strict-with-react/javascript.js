@@ -47,8 +47,7 @@ log(newNumbers)
 try {
   // Attempt to parse an invalid JSON string
   JSON.parse('invalid JSON')
-}
-catch (error) {
+} catch (error) {
   console.error('Error parsing JSON:', error.message)
 }
 
@@ -67,7 +66,6 @@ let a, b, c, d, foo
 if (a
   || b
   || c || d
-  || (d && b)
-) {
+  || (d && b)) {
   foo()
 }

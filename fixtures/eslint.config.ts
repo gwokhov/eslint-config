@@ -1,4 +1,4 @@
-import { gwokhou } from './src'
+import { gwokhou } from '../src'
 
 export default gwokhou(
   {

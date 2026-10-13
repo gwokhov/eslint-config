@@ -16,26 +16,18 @@ export async function jsonc(
     indent = 2,
   } = typeof stylistic === 'boolean' ? {} : stylistic
 
-  const [
-    pluginJsonc,
-    parserJsonc,
-  ] = await Promise.all([
-    interopDefault(import('eslint-plugin-jsonc')),
-    interopDefault(import('jsonc-eslint-parser')),
-  ] as const)
+  const pluginJsonc = await interopDefault(import('eslint-plugin-jsonc'))
 
   return [
     {
       name: 'gwokhou/jsonc/setup',
       plugins: {
-        jsonc: pluginJsonc as any,
+        jsonc: pluginJsonc,
       },
     },
     {
       files,
-      languageOptions: {
-        parser: parserJsonc,
-      },
+      language: 'jsonc/x',
       name: 'gwokhou/jsonc/rules',
       rules: {
         'jsonc/no-bigint-literals': 'error',

@@ -6,6 +6,8 @@ import { FlatConfigComposer } from 'eslint-flat-config-utils'
 import { findUpSync } from 'find-up-simple'
 import { isPackageExists } from 'local-pkg'
 import {
+  angular,
+  antislop,
   astro,
   command,
   comments,
@@ -35,8 +37,10 @@ import {
   vue,
   yaml,
 } from './configs'
+import { e18e } from './configs/e18e'
 import { formatters } from './configs/formatters'
 import { regexp } from './configs/regexp'
+import { GLOB_MARKDOWN } from './globs'
 import { interopDefault, isInEditorEnv } from './utils'
 
 const flatConfigProps = [
@@ -58,9 +62,6 @@ const VuePackages = [
 
 export const defaultPluginRenaming = {
   '@eslint-react': 'react',
-  '@eslint-react/dom': 'react-dom',
-  '@eslint-react/hooks-extra': 'react-hooks-extra',
-  '@eslint-react/naming-convention': 'react-naming-convention',
 
   '@next/next': 'next',
   '@stylistic': 'style',
@@ -82,14 +83,18 @@ export const defaultPluginRenaming = {
  * @returns {Promise<TypedFlatConfigItem[]>}
  *  The merged ESLint configurations.
  */
+// eslint-disable-next-line sonarjs/cognitive-complexity
 export function gwokhou(
   options: OptionsConfig & Omit<TypedFlatConfigItem, 'files' | 'ignores'> = {},
   ...userConfigs: Awaitable<TypedFlatConfigItem | TypedFlatConfigItem[] | FlatConfigComposer<any, any> | Linter.Config[]>[]
 ): FlatConfigComposer<TypedFlatConfigItem, ConfigNames> {
   const {
+    angular: enableAngular = false,
+    antislop: enableAntislop = false,
     astro: enableAstro = false,
     autoRenamePlugins = true,
     componentExts = [],
+    e18e: enableE18e = true,
     gitignore: enableGitignore = true,
     ignores: userIgnores = [],
     imports: enableImports = true,
@@ -97,12 +102,14 @@ export function gwokhou(
     jsx: enableJsx = true,
     nextjs: enableNextjs = false,
     node: enableNode = true,
+    perfectionist: enablePerfectionist = true,
     pnpm: enableCatalogs = !!findUpSync('pnpm-workspace.yaml'),
     react: enableReact = false,
     regexp: enableRegexp = true,
     solid: enableSolid = false,
     svelte: enableSvelte = false,
-    typescript: enableTypeScript = isPackageExists('typescript'),
+    type: appType = 'app',
+    typescript: enableTypeScript = isPackageExists('typescript') || isPackageExists('@typescript/native-preview'),
     unicorn: enableUnicorn = true,
     unocss: enableUnoCSS = false,
     vue: enableVue = VuePackages.some(i => isPackageExists(i)),
@@ -135,8 +142,7 @@ export function gwokhou(
           ...enableGitignore,
         })]),
       )
-    }
-    else {
+    } else {
       configs.push(
         interopDefault(import('eslint-config-flat-gitignore')).then(r => [r({
           name: 'gwokhou/gitignore',
@@ -151,17 +157,22 @@ export function gwokhou(
 
   // Base configs
   configs.push(
-    ignores(userIgnores),
+    ignores(userIgnores, !enableTypeScript),
     javascript({
       isInEditor,
       overrides: getOverrides(options, 'javascript'),
     }),
     comments(),
     command(),
-
-    // Optional plugins (installed but not enabled by default)
-    perfectionist(),
   )
+
+  if (enablePerfectionist) {
+    configs.push(
+      perfectionist({
+        overrides: getOverrides(options, 'perfectionist'),
+      }),
+    )
+  }
 
   if (enableNode) {
     configs.push(
@@ -182,6 +193,15 @@ export function gwokhou(
       imports({
         stylistic: stylisticOptions,
         ...resolveSubOptions(options, 'imports'),
+      }),
+    )
+  }
+
+  if (enableE18e) {
+    configs.push(
+      e18e({
+        isInEditor,
+        ...enableE18e === true ? {} : enableE18e,
       }),
     )
   }
@@ -208,7 +228,18 @@ export function gwokhou(
         ...typescriptOptions,
         componentExts,
         overrides: getOverrides(options, 'typescript'),
-        type: options.type,
+        type: appType,
+      }),
+    )
+  }
+
+  // Registered after the TypeScript config so its `ts/no-explicit-any` override takes effect
+  if (enableAntislop) {
+    configs.push(
+      antislop({
+        ...resolveSubOptions(options, 'antislop'),
+        overrides: getOverrides(options, 'antislop'),
+        typescript: !!enableTypeScript,
       }),
     )
   }
@@ -306,6 +337,12 @@ export function gwokhou(
     )
   }
 
+  if (enableAngular) {
+    configs.push(angular({
+      overrides: getOverrides(options, 'angular'),
+    }))
+  }
+
   if (options.jsonc ?? true) {
     configs.push(
       jsonc({
@@ -323,6 +360,7 @@ export function gwokhou(
       pnpm({
         isInEditor,
         json: options.jsonc !== false,
+        stylistic: stylisticOptions,
         yaml: options.yaml !== false,
         ...optionsPnpm,
       }),
@@ -377,6 +415,7 @@ export function gwokhou(
   // We pick the known keys as ESLint would do schema validation
   const fusedConfig = flatConfigProps.reduce((acc, key) => {
     if (key in options)
+
       acc[key] = options[key] as any
     return acc
   }, {} as TypedFlatConfigItem)
@@ -388,8 +427,17 @@ export function gwokhou(
   composer = composer
     .append(
       ...configs,
+
       ...userConfigs as any,
     )
+
+  // Markdown uses the `markdown/gfm` language, whose `SourceCode` lacks JS-only
+  // methods like `getAllComments`. Without this, any rule override registered
+  // without a `files` constraint would apply globally and crash on `.md` files.
+  // See https://github.com/antfu/eslint-config/issues/837.
+  if (options.markdown ?? true) {
+    composer = composer.setDefaultIgnores(prev => [...prev, GLOB_MARKDOWN])
+  }
 
   if (autoRenamePlugins) {
     composer = composer
@@ -429,7 +477,7 @@ export function getOverrides<K extends keyof OptionsConfig>(
 ): Partial<Linter.RulesRecord & RuleOptions> {
   const sub = resolveSubOptions(options, key)
   return {
-    ...(options.overrides as any)?.[key],
+    ...(options.overrides as Record<string, TypedFlatConfigItem['rules']> | undefined)?.[key],
     ...'overrides' in sub
       ? sub.overrides
       : {},

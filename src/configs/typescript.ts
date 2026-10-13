@@ -94,7 +94,7 @@ export async function typescript(
                 tsconfigRootDir: process.cwd(),
               }
             : {},
-          ...parserOptions as any,
+          ...parserOptions,
         },
       },
       name: `gwokhou/typescript/${typeAware ? 'type-aware-parser' : 'parser'}`,
@@ -103,11 +103,11 @@ export async function typescript(
 
   return [
     {
-      // Install the plugins without globs, so they can be configured separately.
+      /** Install the plugins without globs, so they can be configured separately. */
       name: 'gwokhou/typescript/setup',
       plugins: {
         antfu: pluginAntfu,
-        ts: pluginTs as any,
+        ts: pluginTs,
       },
     },
     // assign type-aware parser for type-aware files and type-unaware parser for the rest
@@ -199,6 +199,7 @@ export async function typescript(
             },
             rules: {
               'erasable-syntax-only/enums': 'error',
+              'erasable-syntax-only/export-aliases': 'error',
               'erasable-syntax-only/import-aliases': 'error',
               'erasable-syntax-only/namespaces': 'error',
               'erasable-syntax-only/parameter-properties': 'error',
