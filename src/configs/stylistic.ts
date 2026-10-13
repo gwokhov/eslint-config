@@ -62,16 +62,13 @@ export async function stylistic(
 
         'antfu/consistent-chaining': 'error',
 
-        ...(lessOpinionated
-          ? {
-              curly: ['error', 'all'],
-            }
+        'curly': ['error', 'all'],
+
+        ...lessOpinionated
+          ? {}
           : {
-              'antfu/curly': 'error',
-              'antfu/if-newline': 'error',
               'antfu/top-level-function': 'error',
-            }
-        ),
+            },
 
         'style/brace-style': ['error', '1tbs', { allowSingleLine: false }],
         'style/generator-star-spacing': ['error', { after: true, before: false }],

@@ -409,7 +409,6 @@ export interface OptionsConfig extends OptionsComponentExts, OptionsProjectType 
    *
    * Including:
    * - `antfu/top-level-function`
-   * - `antfu/if-newline`
    *
    * @default false
    */
